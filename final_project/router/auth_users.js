@@ -58,6 +58,16 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     return res.status(300).json({messages: "Review for " + filtered_books.title + ": " + Object.values(filtered_books.reviews)});
 });
 
+// Delete a book review
+regd_users.delete('/auth/review/:isbn', function (req, res) {
+    const isbn = req.params.isbn;
+    let filtered_books = allBooks.find((book) => book.isbn === isbn);
+    const userLeavingReview = req.session.authorization.username
+    let reviews = filtered_books["reviews"]
+    Reflect.deleteProperty(reviews, userLeavingReview)
+    return res.status(300).json({messages: "Review for " + filtered_books.title + ": " + Object.values(reviews)});
+});
+
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
 module.exports.registerUser = registerUser;
