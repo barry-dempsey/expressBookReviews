@@ -38,10 +38,11 @@ public_users.get('/title/:title', function (req, res) {
     return res.status(300).json({message: filtered_books});
 });
 
-//  Get book review
-public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+// Get book review
+public_users.get('/review/isbn/:isbn', function (req, res) {
+    const isbn = req.params.isbn;
+    let filtered_books = allBooks.find((book) => book.isbn === isbn);
+    return res.status(300).json({messages: "Review for " + filtered_books.title + ": " + Object.values(filtered_books.reviews)});
 });
 
 module.exports.general = public_users;
