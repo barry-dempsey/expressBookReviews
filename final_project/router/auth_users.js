@@ -46,6 +46,11 @@ regd_users.post("/login", (req, res) => {
     }
 });
 
+// Get the book list available in the shop
+regd_users.get('/auth/',function (req, res) {
+    return res.status(300).json({books: allBooks});
+});
+
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
     const isbn = req.params.isbn
