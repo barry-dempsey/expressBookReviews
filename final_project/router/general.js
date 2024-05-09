@@ -32,6 +32,11 @@ const doesExist = (username) => {
     return userswithsamename.length > 0;
 }
 
+// Get the book list available in the shop
+public_users.get('/books',function (req, res) {
+    return res.status(300).json({books: allBooks});
+});
+
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn', function (req, res) {
     const isbn = req.params.isbn;
